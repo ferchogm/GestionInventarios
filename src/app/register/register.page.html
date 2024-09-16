@@ -1,0 +1,26 @@
+<ion-content>
+  <div class="register-container">
+    <ion-card class="card">
+      <ion-card-header>
+        <h2 class="page-title">Crear una Cuenta</h2>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item class="form-input">
+          <ion-input placeholder="Correo Electrónico" [(ngModel)]="user.email" type="email"></ion-input>
+        </ion-item>
+        <ion-item class="form-input">
+          <ion-input placeholder="Contraseña" [(ngModel)]="user.password" type="password"></ion-input>
+        </ion-item>
+        <ion-item class="form-input">
+          <ion-select placeholder="Rol" [(ngModel)]="user.role">
+            <ion-select-option value="admin">Admin</ion-select-option>
+            <ion-select-option value="logistica">Logística</ion-select-option>
+            <ion-select-option value="consulta">Consulta</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button class="button" expand="full" (click)="register()">Registrar Cuenta</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

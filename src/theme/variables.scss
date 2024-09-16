@@ -1,0 +1,50 @@
+// For information on how to create your own theme, please see:
+// http://ionicframework.com/docs/theming/
+// variables.scss
+:root {
+    --ion-color-primary: #1c6ef2;
+    --ion-color-secondary: #4c8bf5;
+    --ion-color-tertiary: #e0f7fa;
+    --ion-background-color: #ffffff;
+    --ion-text-color: #1e1e1e;
+    --ion-text-color-secondary: #666666;
+    --ion-font-family: 'Roboto', sans-serif;
+    --border-radius: 8px;
+  }
+  
+  .page-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--ion-color-primary);
+    text-align: center;
+  }
+  
+  .button {
+    width: 100%;
+    border-radius: var(--border-radius);
+    background-color: var(--ion-color-primary);
+    color: #ffffff;
+  }
+  
+  .card {
+    background-color: var(--ion-background-color);
+    border-radius: var(--border-radius);
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-input {
+    margin-bottom: 16px;
+  }
+  
+  .menu-button {
+    width: 100%;
+    padding: 12px;
+    text-align: center;
+    background-color: var(--ion-color-secondary);
+    color: #ffffff;
+    border-radius: var(--border-radius);
+    margin-bottom: 10px;
+  }
+  

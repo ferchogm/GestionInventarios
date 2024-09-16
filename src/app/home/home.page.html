@@ -1,0 +1,11 @@
+<ion-content>
+  <div class="home-container">
+    <ion-card class="card">
+      <h2 class="page-title">Menú Principal</h2>
+      <ion-button class="menu-button" (click)="goToInventory()">Inventario</ion-button>
+      <ion-button class="menu-button" (click)="goToCategories()">Categorías</ion-button>
+      <ion-button class="menu-button" (click)="goToReports()">Reportes</ion-button>
+      <ion-button class="menu-button" (click)="goToUsers()" *ngIf="userRole === 'admin'">Usuarios</ion-button>
+    </ion-card>
+  </div>
+</ion-content>
