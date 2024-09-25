@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   email: string = '';
   password: string = '';
 
@@ -18,8 +23,6 @@ export class LoginPage implements OnInit {
     private alertController: AlertController,
     private loadingController: LoadingController
   ) {}
-
-  ngOnInit() {}
 
   async login() {
     if (this.email === '' || this.password === '') {
@@ -32,17 +35,10 @@ export class LoginPage implements OnInit {
     });
     await loading.present();
 
-    this.authService
-      .login(this.email, this.password)
-      .then(async (userCredential) => {
-        await loading.dismiss();
-        if (userCredential) {
-          // Obtener el rol del usuario desde el servicio de autenticación
-          const userRole = await this.authService.getUserRole(userCredential.user?.uid);
-          this.navigateBasedOnRole(userRole);
-        } else {
-          this.presentAlert('Error', 'Credenciales incorrectas.');
-        }
+    this.authService.loginUser(this.email, this.password)
+      .then(() => {
+        loading.dismiss();
+        this.router.navigate(['/home']);
       })
       .catch(async (error) => {
         await loading.dismiss();
@@ -51,25 +47,6 @@ export class LoginPage implements OnInit {
       });
   }
 
-  // Navegar a la página correspondiente según el rol del usuario
-  navigateBasedOnRole(role: string) {
-    switch (role) {
-      case 'admin':
-        this.router.navigate(['/home']);
-        break;
-      case 'logística':
-        this.router.navigate(['/inventory']);
-        break;
-      case 'consulta':
-        this.router.navigate(['/reports']);
-        break;
-      default:
-        this.presentAlert('Error', 'Rol no reconocido.');
-        break;
-    }
-  }
-
-  // Método para mostrar alertas
   async presentAlert(header: string, message: string) {
     const alert = await this.alertController.create({
       header,

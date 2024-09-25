@@ -1,81 +1,53 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { RoleGuard } from './guards/role.guard'; // Importar el guard para los roles
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
-  // Ruta por defecto que redirige a la página de inicio de sesión
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-
-  // Ruta para la página de inicio de sesión
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadComponent: () => import('./login/login.page').then(m => m.LoginPage)
   },
-
-  // Ruta para la página de creación de cuenta
   {
-    path: 'create-account',
-    loadChildren: () => import('./create-account/create-account.module').then(m => m.CreateAccountPageModule)
+    path: 'register',
+    loadComponent: () => import('./register/register.page').then(m => m.RegisterPage)
   },
-
-  // Ruta para el menú principal accesible solo por roles admin y logística
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
+    loadComponent: () => import('./home/home.page').then(m => m.HomePage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística'] }
+    data: { roles: ['admin', 'logistica'] }
   },
-
-  // Ruta para la sección de inventario
   {
     path: 'inventory',
-    loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryPageModule),
+    loadComponent: () => import('./inventory/inventory.page').then(m => m.InventoryPage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística'] }
+    data: { roles: ['admin', 'logistica'] }
   },
-
-  // Ruta para la sección de reportes
   {
     path: 'reports',
-    loadChildren: () => import('./reports/reports.module').then(m => m.ReportsPageModule),
+    loadComponent: () => import('./reports/reports.page').then(m => m.ReportsPage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística', 'consulta'] }
+    data: { roles: ['admin', 'logistica', 'consulta'] }
   },
-
-  // Ruta para la sección de categorías
   {
     path: 'categories',
-    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesPageModule),
+    loadComponent: () => import('./categories/categories.page').then(m => m.CategoriesPage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística'] }
+    data: { roles: ['admin', 'logistica'] }
   },
-
-  // Ruta para la sección de gestión de usuarios (solo accesible por admin)
-  {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersPageModule),
-    canActivate: [RoleGuard],
-    data: { roles: ['admin'] }
-  },
-
-  // Ruta para la sección de gestión de stock
   {
     path: 'stock',
-    loadChildren: () => import('./stock/stock.module').then(m => m.StockPageModule),
+    loadComponent: () => import('./stock/stock.page').then(m => m.StockPage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística'] }
+    data: { roles: ['admin', 'logistica'] }
   },
-
-  // Ruta para la sección de consulta de productos
   {
-    path: 'products',
-    loadChildren: () => import('./products/products.module').then(m => m.ProductsPageModule),
+    path: 'product',
+    loadComponent: () => import('./product/product.page').then(m => m.ProductPage),
     canActivate: [RoleGuard],
-    data: { roles: ['admin', 'logística', 'consulta'] }
-  },
-
-  // Ruta comodín para manejar rutas no encontradas
-  { path: '**', redirectTo: 'login', pathMatch: 'full' }
+    data: { roles: ['admin', 'logistica', 'consulta'] }
+  }
 ];
 
 @NgModule({
